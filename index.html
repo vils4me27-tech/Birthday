@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Love</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; text-align: center; background: pink; margin: 0; overflow-x: hidden; }
+    .hidden { display: none; }
+
+    /* Heart pulsing */
+    .heart {
+      width: 100px; height: 90px;
+      position: relative; margin: 50px auto;
+      animation: pulse 1s infinite;
+    }
+    .heart:before, .heart:after {
+      content: ""; position: absolute; top: 0; width: 100px; height: 90px;
+      border-radius: 50px 50px 0 0; background: red;
+    }
+    .heart:before { left: -50px; transform: rotate(-45deg); transform-origin: 100% 100%; }
+    .heart:after { left: 50px; transform: rotate(45deg); transform-origin: 0 100%; }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Buttons floating */
+    button {
+      padding: 10px 20px; margin: 20px; font-size: 16px;
+      animation: floatBtn 2s ease-in-out infinite;
+      border: none; border-radius: 8px; background: #ff4081; color: white; cursor: pointer;
+    }
+    @keyframes floatBtn {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Candle flame flicker */
+    .flame {
+      width: 20px; height: 40px; background: orange; border-radius: 50%;
+      margin: 20px auto; animation: flicker 0.2s infinite alternate;
+    }
+    @keyframes flicker {
+      from { transform: scaleY(1); background: orange; }
+      to { transform: scaleY(1.2); background: gold; }
+    }
+
+    /* Balloons floating */
+    .balloon {
+      display: inline-block; margin: 10px; padding: 20px;
+      background: lightblue; border-radius: 50%; cursor: pointer;
+      animation: floatBalloon 3s ease-in-out infinite;
+    }
+    @keyframes floatBalloon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Smooth fade */
+    .fade { animation: fadeIn 1s forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Password Screen -->
+<div id="passwordScreen" class="fade">
+  <div class="heart"></div>
+  <h2>Enter Password to Begin</h2>
+  <input type="password" id="pwdInput">
+  <button onclick="checkPassword()">Enter</button>
+</div>
+
+<!-- Candle Screen -->
+<div id="candleScreen" class="hidden fade">
+  <h2>Make a Birthday Wish!</h2>
+  <div class="flame"></div>
+  <button onclick="blowCandle()">Blow Candle 🎂</button>
+</div>
+
+<!-- Balloons Screen -->
+<div id="balloonScreen" class="hidden fade">
+  <h2>Happy Birthday My Love ❤️</h2>
+  <p>Pop all balloons!</p>
+  <div id="balloons">
+    <div class="balloon" onclick="popBalloon(this,'You')">🎈</div>
+    <div class="balloon" onclick="popBalloon(this,'are')">🎈</div>
+    <div class="balloon" onclick="popBalloon(this,'so special')">🎈</div>
+    <div class="balloon" onclick="popBalloon(this,'my love')">🎈</div>
+  </div>
+</div>
+
+<!-- Gift Screen -->
+<div id="giftScreen" class="hidden fade">
+  <h2>Do you want to open your Birthday Gift?</h2>
+  <button onclick="showGiftOptions()">Yes 🎁</button>
+</div>
+
+<!-- Gift Options -->
+<div id="giftOptions" class="hidden fade">
+  <h2>Choose your gift</h2>
+  <button onclick="showGift('image')">Image</button>
+  <button onclick="showGift('letter')">Letter</button>
+  <button onclick="showGift('video')">Video</button>
+  <div id="giftContent"></div>
+</div>
+
+<script>
+function checkPassword() {
+  const pwd = document.getElementById('pwdInput').value;
+  if (pwd === "love123") {
+    document.getElementById('passwordScreen').classList.add('hidden');
+    document.getElementById('candleScreen').classList.remove('hidden');
+  } else {
+    alert("Wrong password, try again!");
+  }
+}
+
+function blowCandle() {
+  document.getElementById('candleScreen').classList.add('hidden');
+  document.getElementById('balloonScreen').classList.remove('hidden');
+}
+
+function popBalloon(el, text) {
+  el.innerText = text;
+  el.style.background = "pink";
+  el.style.animation = "none"; // stop floating once popped
+  const balloons = document.querySelectorAll('#balloons .balloon');
+  if ([...balloons].every(b => b.innerText !== "🎈")) {
+    setTimeout(() => {
+      document.getElementById('balloonScreen').classList.add('hidden');
+      document.getElementById('giftScreen').classList.remove('hidden');
+    }, 1000);
+  }
+}
+
+function showGiftOptions() {
+  document.getElementById('giftScreen').classList.add('hidden');
+  document.getElementById('giftOptions').classList.remove('hidden');
+}
+
+function showGift(type) {
+  const content = document.getElementById('giftContent');
+  if (type === 'image') {
+    content.innerHTML = "<img src='your_image.jpg' width='300'>";
+  } else if (type === 'letter') {
+    content.innerHTML = "<p style='font-size:18px;color:red;'>My dearest love, you mean the world to me...</p>";
+  } else if (type === 'video') {
+    content.innerHTML = "<video width='300' controls><source src='your_video.mp4' type='video/mp4'></video>";
+  }
+}
+</script>
+
+</body>
+</html>

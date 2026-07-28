@@ -84,8 +84,8 @@
 
 <!-- Balloons Screen -->
 <div id="balloonScreen" class="hidden fade">
-  <h2>Happy Birthday My Love ❤️</h2>
-  <p>Pop all balloons!</p>
+  <h2>Wish you a very very Happy Birthday My Love ❤️</h2>
+  <p>Please Pop all balloons my Queen :-) !</p>
   <div id="balloons">
     <div class="balloon" onclick="popBalloon(this,'You')">🎈</div>
     <div class="balloon" onclick="popBalloon(this,'are')">🎈</div>
@@ -112,7 +112,7 @@
 <script>
 function checkPassword() {
   const pwd = document.getElementById('pwdInput').value;
-  if (pwd === "love123") {
+  if (pwd === "3007") {
     document.getElementById('passwordScreen').classList.add('hidden');
     document.getElementById('candleScreen').classList.remove('hidden');
   } else {
@@ -146,9 +146,9 @@ function showGiftOptions() {
 function showGift(type) {
   const content = document.getElementById('giftContent');
   if (type === 'image') {
-    content.innerHTML = "<img src='your_image.jpg' width='300'>";
+    content.innerHTML = "<img src='img.jpeg' width='300'>";
   } else if (type === 'letter') {
-    content.innerHTML = "<p style='font-size:18px;color:red;'>My dearest love, you mean the world to me...</p>";
+    content.innerHTML = "<p style='font-size:18px;color:red;'>Wish you a very very Happy Birthday to my Love. Do not take so much time to thinking, We already did the hardest thing, which is finding each other amongst millions of people, now let's do the easiest thing-love each other... Let's stop playing around and make it official. Marry me.</p>";
   } else if (type === 'video') {
     content.innerHTML = "<video width='300' controls><source src='your_video.mp4' type='video/mp4'></video>";
   }
